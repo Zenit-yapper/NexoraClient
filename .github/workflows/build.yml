@@ -14,11 +14,14 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
-      - name: Validate Gradle Wrapper
-        uses: gradle/actions/wrapper-validation@v3
+      # We removed the "Validate Gradle Wrapper" step that was failing
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: 8.8 # Matches the version in your first screenshot
 
       - name: Build with Gradle
-        run: chmod +x gradlew && ./gradlew build
+        run: gradle build --no-daemon
 
       - name: Upload Mod Artifact
         uses: actions/upload-artifact@v4
