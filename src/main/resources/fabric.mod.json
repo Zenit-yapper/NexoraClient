@@ -13,6 +13,10 @@
     "main": ["com.nexora.client.NexoraClient"],
     "client": ["com.nexora.client.NexoraClient"]
   },
+  "mixins": [
+    "nexora_client.mixins.json"
+  ],
+
   "depends": {
     "fabricloader": ">=0.16.10",
     "minecraft": ">=1.21.1",
