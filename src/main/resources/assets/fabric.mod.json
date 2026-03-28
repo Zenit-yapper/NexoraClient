@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "nexora_client",
+  "version": "1.0.0",
+  "name": "NexoraClient",
+  "authors": ["Pratik"],
+  "contact": {
+    "homepage": "https://www.instagram.com/pratikyaps"
+  },
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "main": ["com.nexora.client.NexoraClient"],
+    "client": ["com.nexora.client.NexoraClient"]
+  },
+  "depends": {
+    "fabricloader": ">=0.16.10",
+    "minecraft": ">=1.21.1",
+    "java": ">=21"
+  }
+}
+
