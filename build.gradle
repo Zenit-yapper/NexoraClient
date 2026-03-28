@@ -19,7 +19,6 @@ dependencies {
 }
 
 tasks.withType(JavaCompile).configureEach {
-    // This ensures compatibility with PojavLauncher's Java 21 requirement
     it.options.release = 21
 }
 
