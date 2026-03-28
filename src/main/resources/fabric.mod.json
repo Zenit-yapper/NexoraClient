@@ -9,7 +9,7 @@
   },
   "license": "MIT",
   "environment": "client",
-  "entrypoints": {
+  "entrypoints": "com.nexora.client.NexoraClient"
     "main": ["com.nexora.client.NexoraClient"],
     "client": ["com.nexora.client.NexoraClient"]
   },
