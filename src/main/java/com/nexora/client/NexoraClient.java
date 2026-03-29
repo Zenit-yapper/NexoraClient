@@ -13,12 +13,12 @@ public class NexoraClient implements ClientModInitializer, ModInitializer {
 
     @Override
     public void onInitialize() {
-        // This stops the "cannot be cast to ModInitializer" crash in your log
+        // This method must be here to prevent entrypoint crashes
     }
 
     @Override
     public void onInitializeClient() {
-        // Menu Key Listener (Right Shift)
+        // Handle Keybinds (Right Shift for Menu)
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (client.options.allKeys[GLFW.GLFW_KEY_RIGHT_SHIFT].wasPressed()) {
                 if (client.player != null && client.currentScreen == null) {
@@ -27,7 +27,7 @@ public class NexoraClient implements ClientModInitializer, ModInitializer {
             }
         });
 
-        // Branding HUD
+        // Handle HUD Rendering
         HudRenderCallback.EVENT.register((context, tickDelta) -> {
             MinecraftClient client = MinecraftClient.getInstance();
             if (client.player == null || client.options.hudHidden) return;
