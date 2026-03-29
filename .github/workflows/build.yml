@@ -18,14 +18,16 @@ jobs:
         uses: gradle/actions/setup-gradle@v3
 
       - name: Make Gradlew Executable
-        run: chmod +x gradlew
+        # Changed this line to point to your subfolder
+        run: chmod +x ./gradlew || chmod +x ./NexoraClient/gradlew
 
       - name: Build with Gradle
-        run: ./gradlew build
+        # Changed this line to run from the correct directory
+        run: ./gradlew build || (cd NexoraClient && ./gradlew build)
 
       - name: Upload Mod JAR
         uses: actions/upload-artifact@v4
         with:
           name: Nexora-Client-Build
-          path: build/libs/*.jar
+          path: "**/build/libs/*.jar"
           
