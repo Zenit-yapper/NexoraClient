@@ -6,7 +6,10 @@
     "ReachMixin",
     "FPSMixin",
     "FullbrightMixin",
-    "MainMenuMixin"
+    "MainMenuMixin",
+    "HurtcamMixin",
+    "MotionBlurMixin",
+    "NexoraOptimizerMixin"
   ],
   "injectors": {
     "defaultRequire": 1
