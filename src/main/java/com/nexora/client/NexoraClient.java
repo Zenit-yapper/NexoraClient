@@ -1,15 +1,17 @@
 package com.nexora.client;
 
-import net.fabricmc.api.ModInitializer; // This must be imported
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import net.fabricmc.api.ModInitializer;
+import net.fabricmc.api.ClientModInitializer;
 
-public class NexoraClient implements ModInitializer { // You MUST add 'implements ModInitializer'
-    public static final Logger LOGGER = LoggerFactory.getLogger("nexora-client");
+public class NexoraClient implements ModInitializer, ClientModInitializer {
 
     @Override
     public void onInitialize() {
-        // This is where the game looks to start your mod
-        LOGGER.info("Nexora Client is starting!");
+        // This handles the "main" entrypoint
+    }
+
+    @Override
+    public void onInitializeClient() {
+        // This handles the "client" entrypoint
     }
 }
