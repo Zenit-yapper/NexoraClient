@@ -3,15 +3,31 @@
   "id": "nexora_client",
   "version": "1.0.0",
   "name": "Nexora Client",
-  "Description": "Professional Pvp and Fps boosting Client."
-  "authors": ["Pratik"],
-  "entrypoints": {
-    "main": [ "com.nexora.client.NexoraClient" ],
-    "client": [ "com.nexora.client.NexoraClient" ]
+  "description": "A custom client for Minecraft 1.21.1",
+  "authors": [
+    "Pratik"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
   },
-  "mixins": [ "nexora_client.mixins.json" ],
+  "license": "MIT",
+  "icon": "assets/nexora_client/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.nexora.client.NexoraClient"
+    ],
+    "client": [
+      "com.nexora.client.NexoraClient"
+    ]
+  },
+  "mixins": [
+    "nexora_client.mixins.json"
+  ],
   "depends": {
     "fabricloader": ">=0.16.10",
-    "minecraft": "1.21.1"
+    "minecraft": "1.21.1",
+    "java": ">=17"
   }
 }
