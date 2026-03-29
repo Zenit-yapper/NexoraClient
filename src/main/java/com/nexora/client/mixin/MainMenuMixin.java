@@ -17,14 +17,12 @@ public class MainMenuMixin {
         int w = context.getScaledWindowWidth();
         int h = context.getScaledWindowHeight();
 
-        // Dark modern overlay
+        // Dark Background
         context.fill(0, 0, w, h, 0xAA000000);
 
-        // Center Title - Fixed for 1.21.1
-        String title = Formatting.AQUA + "NEXORA " + Formatting.WHITE + "CLIENT";
-        context.drawText(client.textRenderer, title, (w / 2) - 40, (h / 2) - 10, 0xFFFFFF, true);
-
-        // Bottom left user info
-        context.drawText(client.textRenderer, "Developer: " + Formatting.AQUA + "Pratik", 10, h - 20, 0xFFFFFF, true);
+        // PERFECTLY CENTERED LOGO
+        String title = "NEXORA CLIENT";
+        int textWidth = client.textRenderer.getWidth(title);
+        context.drawText(client.textRenderer, Formatting.AQUA + title, (w / 2) - (textWidth / 2), (h / 2) - 10, 0xFFFFFF, true);
     }
 }
