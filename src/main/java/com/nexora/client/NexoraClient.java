@@ -13,12 +13,12 @@ public class NexoraClient implements ClientModInitializer, ModInitializer {
 
     @Override
     public void onInitialize() {
-        // Essential to satisfy the 'main' entrypoint in fabric.mod.json
+        // Required for the 'main' entrypoint to prevent crashes
     }
 
     @Override
     public void onInitializeClient() {
-        // Right Shift (Mojo Key Code 6036) opens the menu
+        // Key Listener for Right Shift (Mojo 6036)
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (client.options.allKeys[GLFW.GLFW_KEY_RIGHT_SHIFT].wasPressed()) {
                 if (client.player != null && client.currentScreen == null) {
@@ -27,7 +27,7 @@ public class NexoraClient implements ClientModInitializer, ModInitializer {
             }
         });
 
-        // Renders the branding HUD
+        // Branding HUD
         HudRenderCallback.EVENT.register((context, tickDelta) -> {
             MinecraftClient client = MinecraftClient.getInstance();
             if (client.player == null || client.options.hudHidden) return;
