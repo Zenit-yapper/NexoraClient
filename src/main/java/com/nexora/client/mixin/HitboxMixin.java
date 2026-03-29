@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class HitboxMixin {
     @Inject(method = "getTargetingMargin", at = @At("HEAD"), cancellable = true)
     private void onHitbox(CallbackInfoReturnable<Float> cir) {
-        // We use (float) to ensure the conversion is correct
+        // FIXED: Force convert the ClickGui double to a float for Minecraft
         cir.setReturnValue((float) ClickGuiScreen.hitboxSize);
     }
 }
