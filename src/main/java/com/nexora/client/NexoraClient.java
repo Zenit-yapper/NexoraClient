@@ -1,36 +1,30 @@
 package com.nexora.client;
 
-import com.nexora.client.gui.ClickGuiScreen;
-import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.option.KeyBinding;
-import net.minecraft.client.util.InputUtil;
-import org.lwjgl.glfw.GLFW;
+import net.minecraft.item.ItemStack;
 
-public class NexoraClient implements ModInitializer, ClientModInitializer {
+public class NexoraClient implements net.fabricmc.api.ModInitializer, net.fabricmc.api.ClientModInitializer {
     public static boolean fullbright = false;
-    public static KeyBinding guiKey;
 
-    @Override
-    public void onInitialize() {}
+    @Override public void onInitialize() {}
 
     @Override
     public void onInitializeClient() {
-        guiKey = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-                "key.nexora.gui", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_RIGHT_SHIFT, "Nexora"
-        ));
+        HudRenderCallback.EVENT.register((context, tickDelta) -> {
+            MinecraftClient client = MinecraftClient.getInstance();
+            if (client.player == null || client.options.hudHidden) return;
 
-        ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            while (guiKey.wasPressed()) {
-                client.setScreen(new ClickGuiScreen());
-            }
+            // 1. FPS Counter (Top Left)
+            context.drawText(client.textRenderer, "§bNEXORA §8| §f" + client.getCurrentFps() + " FPS", 5, 5, -1, true);
 
-            // FULLBRIGHT LOGIC: Force Gamma to 1000%
-            if (fullbright && client.options != null) {
-                client.options.getGamma().setValue(10.0); 
+            // 2. Armor HUD (Lunar Vertical Style)
+            int y = height / 2 - 40;
+            for (ItemStack stack : client.player.getArmorItems()) {
+                if (!stack.isEmpty()) {
+                    context.drawItem(stack, 5, y);
+                    y += 20;
+                }
             }
         });
     }
