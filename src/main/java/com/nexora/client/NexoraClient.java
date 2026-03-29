@@ -1,20 +1,23 @@
 package com.nexora.client;
 
 import com.nexora.client.hud.NexoraHud;
+import com.nexora.client.gui.ClickGuiScreen;
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import org.lwjgl.glfw.GLFW;
 
-public class NexoraClient implements ModInitializer, ClientModInitializer {
-    @Override
-    public void onInitialize() {
-        // Essential safety for PojavLauncher
-    }
-
+public class NexoraClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-        // Start the HUD
         NexoraHud.init();
-        System.out.println("NexoraClient 1.21.1 is now Active!");
+
+        ClientTickEvents.END_CLIENT_TICK.register(client -> {
+            // Check if Right Shift is pressed
+            if (client.player != null && GLFW.glfwGetKey(client.getWindow().getHandle(), GLFW.GLFW_KEY_RIGHT_SHIFT) == GLFW.GLFW_PRESS) {
+                if (!(client.currentScreen instanceof ClickGuiScreen)) {
+                    client.setScreen(new ClickGuiScreen());
+                }
+            }
+        });
     }
 }
-
