@@ -14,7 +14,7 @@ public class NametagMixin {
     @ModifyVariable(method = "renderLabelIfPresent", at = @At("HEAD"), argsOnly = true)
     private Text addMoonIcon(Text text, Entity entity) {
         if (entity instanceof PlayerEntity) {
-            // Adds a yellow moon icon before the player's name
+            // Adds a yellow Moon symbol before the name
             return Text.literal(Formatting.YELLOW + "☾ " + Formatting.RESET).append(text);
         }
         return text;
