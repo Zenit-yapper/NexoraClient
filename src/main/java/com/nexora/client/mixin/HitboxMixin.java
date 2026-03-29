@@ -10,9 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(Entity.class)
 public class HitboxMixin {
     @Inject(method = "getTargetingMargin", at = @At("HEAD"), cancellable = true)
-    private void onGetTargetingMargin(CallbackInfoReturnable<Float> cir) {
-        // Expands the hitbox by our secret value
+    private void expandHitbox(CallbackInfoReturnable<Float> cir) {
         cir.setReturnValue(ClickGuiScreen.hitboxSize);
     }
 }
-
