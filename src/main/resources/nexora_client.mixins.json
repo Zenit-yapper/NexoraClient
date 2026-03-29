@@ -5,8 +5,9 @@
   "mixins": [
     "FullbrightMixin",
     "MotionBlurMixin",
-    "MainMenuMixin" ,
-    "FPSMixin"
+    "MainMenuMixin",
+    "FPSMixin",
+    "HurtcamMixin"
   ],
   "injectors": {
     "defaultRequire": 1
