@@ -14,22 +14,22 @@ public class MainMenuMixin {
     @Inject(method = "render", at = @At("TAIL"))
     private void renderNexoraNature(DrawContext context, int mouseX, int mouseY, float delta, CallbackInfo ci) {
         MinecraftClient client = MinecraftClient.getInstance();
-        int w = context.getScaledWindowWidth(); 
+        int w = context.getScaledWindowWidth();
         int h = context.getScaledWindowHeight();
 
-        // Moon Logic
+        // 1. Moon Animation
         long time = System.currentTimeMillis() / 50;
         int moonX = (int) (time % (w + 200)) - 100;
         drawCircle(context, moonX, 60, 20, 0xFFEEEEEE);
 
-        // Mountains
+        // 2. Mountains
         drawMountains(context, w, h, 0xCC1a1a1a, 70, 0.01);
         drawMountains(context, w, h, 0xFF2d2d2d, 40, 0.02);
 
-        // Fixed Logo Drawing for 1.21.1
+        // 3. Logo (Fixed Method Call)
         String title = "NEXORA CLIENT";
-        int textWidth = client.textRenderer.getWidth(title);
-        context.drawText(client.textRenderer, Formatting.AQUA + title, (w / 2) - (textWidth / 2), (h / 2) - 10, 0xFFFFFF, true);
+        int textX = (w / 2) - (client.textRenderer.getWidth(title) / 2);
+        context.drawText(client.textRenderer, Formatting.AQUA + title, textX, (h / 2) - 10, 0xFFFFFF, true);
     }
 
     private void drawMountains(DrawContext context, int w, int h, int color, int base, double freq) {
