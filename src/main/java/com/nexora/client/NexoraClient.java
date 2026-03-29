@@ -9,6 +9,6 @@ public class NexoraClient implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        LOGGER.info("Nexora Client has started successfully!");
+        LOGGER.info("Nexora Client initialized successfully!");
     }
 }
