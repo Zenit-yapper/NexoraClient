@@ -11,8 +11,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class ReachMixin {
     @Inject(method = "getEntityInteractionRange", at = @At("HEAD"), cancellable = true)
     private void onReach(CallbackInfoReturnable<Double> cir) {
-        // Uses the reach value from your ClickGUI
-        cir.setReturnValue((double) ClickGuiScreen.reachDistance);
+        // Use a default value of 4.5 if you haven't set up the GUI slider yet
+        // or use (double) ClickGuiScreen.reachDistance if the GUI is ready
+        cir.setReturnValue(4.5); 
     }
 }
-
