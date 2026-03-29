@@ -5,9 +5,7 @@
   "mixins": [
     "FullbrightMixin",
     "MotionBlurMixin",
-    "MainMenuMixin",
-    "ReachMixin",
-    "HitboxMixin"
+    "MainMenuMixin"
   ],
   "injectors": {
     "defaultRequire": 1
