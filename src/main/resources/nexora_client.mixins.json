@@ -9,7 +9,9 @@
     "MainMenuMixin",
     "HurtcamMixin",
     "MotionBlurMixin",
-    "NexoraOptimizerMixin"
+    "NexoraOptimizerMixin",
+    "NoNarratorMixin"
+    
   ],
   "injectors": {
     "defaultRequire": 1
