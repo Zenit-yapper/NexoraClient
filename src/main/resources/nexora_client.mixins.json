@@ -9,7 +9,8 @@
     "FPSMixin",
     "HurtcamMixin",
     "HitboxMixin",
-    "HurtcamMixin"
+    "HurtcamMixin",
+    "CombatMixin.java"
   ],
   "injectors": {
     "defaultRequire": 1
