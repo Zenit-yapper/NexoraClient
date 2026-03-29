@@ -8,7 +8,7 @@
     "MainMenuMixin",
     "FPSMixin",
     "HurtcamMixin",
-    "CombatMixin.java"
+    "ReachMixin.java"
   ],
   "injectors": {
     "defaultRequire": 1
