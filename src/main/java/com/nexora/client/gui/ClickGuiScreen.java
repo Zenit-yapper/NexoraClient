@@ -6,45 +6,68 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.Text;
 
 public class ClickGuiScreen extends Screen {
-    // Shared Global Settings
+    // Combat Stats
     public static float reachDistance = 3.0f;
     public static float hitboxSize = 0.0f;
+    
+    // HUD Toggles
     public static boolean toggleSprint = true;
     public static boolean showKeystrokes = true;
     public static boolean armorHUD = true;
+    public static boolean showCPS = true;
+    public static boolean showCoords = true;
+    public static boolean smoothZoom = true;
 
-    public ClickGuiScreen() { super(Text.literal("Nexora")); }
+    public ClickGuiScreen() { super(Text.literal("Nexora Professional")); }
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        this.renderBackground(context, mouseX, mouseY, delta);
+        // Full screen transparent wash
+        context.fill(0, 0, width, height, 0x66000000); 
+
+        int x = width / 2 - 220;
+        int y = height / 2 - 130;
+        int w = 440;
+        int h = 260;
+
+        // Main Glass Panel
+        context.fill(x, y, x + w, y + h, 0xAA050505); 
+        context.fill(x, y, x + w, y + 2, 0xFF00E5FF); // Accent Top
+
+        // Sidebar Categories
+        context.fill(x, y, x + 100, y + h, 0x33000000);
+        context.drawText(textRenderer, "§b§lNEXORA", x + 15, y + 20, -1, false);
         
-        // 1. Main Background Panel
-        int x = width / 2 - 200, y = height / 2 - 120, w = 400, h = 240;
-        context.fill(x, y, x + w, y + h, 0xCC101010); // Main Dark Body
-        context.fill(x, y, x + 100, y + h, 0xFF0D0D0D); // Sidebar
+        String[] tabs = {"General", "Combat", "Visuals", "HUD"};
+        for(int i = 0; i < tabs.length; i++) {
+            context.drawText(textRenderer, tabs[i], x + 15, y + 55 + (i * 20), -1, false);
+        }
 
-        // 2. Sidebar Tabs
-        drawTab(context, "ALL", x + 10, y + 40, true);
-        drawTab(context, "HUD", x + 10, y + 60, false);
-        drawTab(context, "COMBAT", x + 10, y + 80, false);
+        // Mod Grid (Example Row 1)
+        drawMod(context, "Sprint", x + 110, y + 40, toggleSprint);
+        drawMod(context, "Keystrokes", x + 270, y + 40, showKeystrokes);
+        
+        // Mod Grid (Example Row 2)
+        drawMod(context, "Armor HUD", x + 110, y + 80, armorHUD);
+        drawMod(context, "Fullbright", x + 270, y + 80, NexoraClient.fullbright);
 
-        // 3. Mod Grid (Right Side)
-        drawModCard(context, "ToggleSprint", x + 110, y + 30, toggleSprint);
-        drawModCard(context, "Keystrokes", x + 250, y + 30, showKeystrokes);
-        drawModCard(context, "Armor HUD", x + 110, y + 70, armorHUD);
-        drawModCard(context, "Fullbright", x + 250, y + 70, NexoraClient.fullbright);
+        // Combat Sliders
+        drawSlider(context, "Reach", reachDistance, x + 110, y + 140, 3.0f, 6.0f);
+        drawSlider(context, "Hitbox", hitboxSize, x + 110, y + 180, 0.0f, 2.0f);
+
+        super.render(context, mouseX, mouseY, delta);
     }
 
-    private void drawTab(DrawContext context, String name, int x, int y, boolean selected) {
-        context.drawText(textRenderer, name, x, y, selected ? 0xFF00E5FF : 0xFF777777, false);
+    private void drawMod(DrawContext context, String name, int x, int y, boolean on) {
+        context.fill(x, y, x + 150, y + 30, 0x22FFFFFF); 
+        context.drawText(textRenderer, name, x + 8, y + 10, -1, false);
+        context.fill(x + 130, y + 8, x + 145, y + 22, on ? 0xFF00FF00 : 0xFF555555);
     }
 
-    private void drawModCard(DrawContext context, String name, int x, int y, boolean enabled) {
-        context.fill(x, y, x + 130, y + 35, 0xFF1A1A1A); // Card
-        context.drawText(textRenderer, name, x + 10, y + 12, -1, false);
-        context.fill(x + 110, y + 10, x + 125, y + 25, enabled ? 0xFF00FF00 : 0xFF444444); // Toggle
+    private void drawSlider(DrawContext context, String label, float val, int x, int y, float min, float max) {
+        context.drawText(textRenderer, label + ": §b" + String.format("%.1f", val), x, y, -1, false);
+        context.fill(x, y + 12, x + 300, y + 14, 0x44FFFFFF);
+        int pos = (int) (x + ((val - min) / (max - min)) * 300);
+        context.fill(pos - 2, y + 8, pos + 2, y + 18, 0xFF00E5FF);
     }
-
-    @Override public boolean shouldPause() { return false; }
 }
