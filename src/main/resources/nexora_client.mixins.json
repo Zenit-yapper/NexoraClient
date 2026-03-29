@@ -5,12 +5,7 @@
   "mixins": [
     "NoNarratorMixin",
     "ReachMixin",
-    "FullbrightMixin",
-    "FPSMixin",
-    "MainMenuMixin",
-    "HurtcamMixin",
-    "MotionBlurMixin",
-    "NexoraOptimizerMixin"
+    "FullbrightMixin"
   ],
   "injectors": {
     "defaultRequire": 1
