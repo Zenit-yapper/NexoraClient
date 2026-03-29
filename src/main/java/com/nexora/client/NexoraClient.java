@@ -2,32 +2,31 @@ package com.nexora.client;
 
 import com.nexora.client.gui.ClickGuiScreen;
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.api.ModInitializer; // Required for 'main' entrypoint
+import net.fabricmc.api.ModInitializer; // Added this import
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import org.lwjgl.glfw.GLFW;
 
+// Added "implements ModInitializer" here
 public class NexoraClient implements ClientModInitializer, ModInitializer {
-    public static boolean fullbright = false;
 
     @Override
     public void onInitialize() {
-        // This stops the "cannot be cast to ModInitializer" crash
+        // This method is required by ModInitializer to prevent the crash
     }
 
     @Override
     public void onInitializeClient() {
-        // Key listener for Right Shift (Mojo 6036)
+        // Your existing GUI and HUD code
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (client.options.allKeys[GLFW.GLFW_KEY_RIGHT_SHIFT].wasPressed()) {
-                if (client.player != null && client.currentScreen == null) {
+                if (client.player != null) {
                     client.setScreen(new ClickGuiScreen());
                 }
             }
         });
 
-        // Branding and HUD
         HudRenderCallback.EVENT.register((context, tickDelta) -> {
             MinecraftClient client = MinecraftClient.getInstance();
             if (client.player == null || client.options.hudHidden) return;
