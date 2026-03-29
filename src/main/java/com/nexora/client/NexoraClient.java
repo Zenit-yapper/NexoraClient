@@ -1,19 +1,39 @@
 package com.nexora.client;
 
 import com.nexora.client.gui.ClickGuiScreen;
-import com.nexora.client.registry.KeybindRegistry;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.option.KeyBinding;
+import net.minecraft.client.util.InputUtil;
+import org.lwjgl.glfw.GLFW;
 
-public class NexoraClient implements ClientModInitializer {
+public class NexoraClient implements ModInitializer, ClientModInitializer {
+    public static boolean fullbright = false;
+    public static boolean fastRender = true; // FPS Boost toggle
+    public static KeyBinding guiKey;
+
+    @Override
+    public void onInitialize() {}
+
     @Override
     public void onInitializeClient() {
-        KeybindRegistry.register();
+        // 1. Register Key
+        guiKey = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+                "key.nexora.gui", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_RIGHT_SHIFT, "Nexora"
+        ));
 
+        // 2. GUI & Logic Tick
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            // Check if our key is pressed and no other screen is open
-            if (KeybindRegistry.clickGuiKey.wasPressed() && client.currentScreen == null) {
+            while (guiKey.wasPressed()) {
                 client.setScreen(new ClickGuiScreen());
+            }
+            
+            // FPS Boost: Force low-frequency cloud rendering if enabled
+            if (fastRender && client.options != null) {
+                client.options.getCloudRenderMode().setValue(net.minecraft.client.option.CloudRenderMode.OFF);
             }
         });
     }
