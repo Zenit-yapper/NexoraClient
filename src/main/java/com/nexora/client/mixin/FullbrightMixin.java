@@ -1,7 +1,5 @@
 package com.nexora.client.mixin;
 
-import com.nexora.client.NexoraClient;
-import net.minecraft.client.option.SimpleOption;
 import net.minecraft.client.render.LightmapTextureManager;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -12,7 +10,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class FullbrightMixin {
     @Inject(method = "getBrightness", at = @At("HEAD"), cancellable = true)
     private static void onGetBrightness(CallbackInfoReturnable<Float> cir) {
-        // If you want it always on:
         cir.setReturnValue(15.0f); 
     }
 }
