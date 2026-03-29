@@ -9,8 +9,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Entity.class)
-public class CombatMixin {
-    // This handles Hitbox expansion
+public abstract class CombatMixin {
     @Inject(method = "getTargetingMargin", at = @At("HEAD"), cancellable = true)
     private void onHitbox(CallbackInfoReturnable<Float> cir) {
         cir.setReturnValue(ClickGuiScreen.hitboxSize);
@@ -18,11 +17,9 @@ public class CombatMixin {
 }
 
 @Mixin(PlayerEntity.class)
-class ReachMixin {
-    // This handles Reach distance
+abstract class ReachMixin {
     @Inject(method = "getEntityInteractionRange", at = @At("HEAD"), cancellable = true)
     private void onReach(CallbackInfoReturnable<Double> cir) {
         cir.setReturnValue((double) ClickGuiScreen.reachDistance);
     }
 }
-
