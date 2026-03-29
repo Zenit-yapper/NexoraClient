@@ -18,16 +18,16 @@ public class MainMenuMixin {
         int w = context.getScaledWindowWidth();
         int h = context.getScaledWindowHeight();
 
-        // Moon
+        // 1. Moon Animation
         long time = System.currentTimeMillis() / 50;
         int moonX = (int) (time % (w + 200)) - 100;
         drawCircle(context, moonX, 60, 20, 0xFFEEEEEE);
 
-        // Mountains
+        // 2. Mountains
         drawMountains(context, w, h, 0xCC1a1a1a, 70, 0.01);
         drawMountains(context, w, h, 0xFF2d2d2d, 40, 0.02);
 
-        // Centered Title (1.21.1 Method)
+        // 3. Centered Nexora Title
         String title = "NEXORA CLIENT";
         int textX = (w / 2) - (client.textRenderer.getWidth(title) / 2);
         context.drawText(client.textRenderer, Formatting.AQUA + title, textX, (h / 2) - 10, 0xFFFFFF, true);
@@ -43,7 +43,9 @@ public class MainMenuMixin {
     private void drawCircle(DrawContext context, int cx, int cy, int r, int col) {
         for (int i = -r; i <= r; i++) {
             for (int j = -r; j <= r; j++) {
-                if (i * i + j * j <= r * r) context.fill(cx + i, cy + j, cx + i + 1, cy + j + 1, col);
+                if (i * i + j * j <= r * r) {
+                    context.fill(cx + i, cy + j, cx + i + 1, cy + j + 1, col);
+                }
             }
         }
     }
