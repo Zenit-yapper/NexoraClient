@@ -10,7 +10,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(Entity.class)
 public class HitboxMixin {
     @Inject(method = "getTargetingMargin", at = @At("HEAD"), cancellable = true)
-    private void expandHitbox(CallbackInfoReturnable<Float> cir) {
+    private void onHitbox(CallbackInfoReturnable<Float> cir) {
+        // FIXED: Uses Float to prevent the conversion error in your logs
         cir.setReturnValue(ClickGuiScreen.hitboxSize);
     }
 }
