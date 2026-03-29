@@ -11,7 +11,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class ReachMixin {
     @Inject(method = "getReachDistance", at = @At("HEAD"), cancellable = true)
     private void onGetReach(CallbackInfoReturnable<Float> cir) {
-        // This overrides the default reach with your custom slider value
         cir.setReturnValue(ClickGuiScreen.reachDistance);
     }
 }
