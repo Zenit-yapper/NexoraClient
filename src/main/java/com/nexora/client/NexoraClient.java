@@ -13,12 +13,12 @@ public class NexoraClient implements ClientModInitializer, ModInitializer {
 
     @Override
     public void onInitialize() {
-        // This stops the "ClassCastException" in your log
+        // This stops the "cannot be cast to ModInitializer" crash
     }
 
     @Override
     public void onInitializeClient() {
-        // Key listener for Right Shift (Mojo Key Code 6036)
+        // Key listener for Right Shift (Mojo 6036)
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (client.options.allKeys[GLFW.GLFW_KEY_RIGHT_SHIFT].wasPressed()) {
                 if (client.player != null && client.currentScreen == null) {
@@ -31,7 +31,6 @@ public class NexoraClient implements ClientModInitializer, ModInitializer {
         HudRenderCallback.EVENT.register((context, tickDelta) -> {
             MinecraftClient client = MinecraftClient.getInstance();
             if (client.player == null || client.options.hudHidden) return;
-            
             context.fill(5, 5, 105, 18, 0x99000000);
             context.drawText(client.textRenderer, "§b§lNEXORA §8| §f" + client.getCurrentFps(), 10, 8, -1, false);
         });
