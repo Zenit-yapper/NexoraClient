@@ -1,20 +1,26 @@
 package com.nexora.client;
 
-import net.fabricmc.api.ModInitializer;
+import com.nexora.client.registry.KeybindRegistry;
 import net.fabricmc.api.ClientModInitializer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.text.Text;
 
-public class NexoraClient implements ModInitializer, ClientModInitializer {
-    public static final Logger LOGGER = LoggerFactory.getLogger("nexora-client");
-
-    @Override
-    public void onInitialize() {
-        LOGGER.info("Nexora Main Initialized");
-    }
-
+public class NexoraClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-        LOGGER.info("Nexora Client Initialized");
+        // Register the key
+        KeybindRegistry.register();
+
+        // Listen for the press
+        ClientTickEvents.END_CLIENT_TICK.register(client -> {
+            while (KeybindRegistry.clickGuiKey.wasPressed()) {
+                // For now, let's just send a message to check if it works
+                // Replace this with: client.setScreen(new YourGuiScreen()); later
+                if (client.player != null) {
+                    client.player.sendMessage(Text.literal("§bNexora GUI Opening..."), false);
+                }
+            }
+        });
     }
 }
