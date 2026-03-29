@@ -8,8 +8,6 @@
     "MainMenuMixin",
     "FPSMixin",
     "HurtcamMixin",
-    "HitboxMixin",
-    "HurtcamMixin",
     "CombatMixin.java"
   ],
   "injectors": {
