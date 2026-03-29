@@ -7,7 +7,9 @@
     "MotionBlurMixin",
     "MainMenuMixin",
     "ReachMixin",
-    "HitboxMixin",
-    "NametagMixin"
-  ]
+    "HitboxMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
 }
