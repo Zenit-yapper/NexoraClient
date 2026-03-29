@@ -3,15 +3,14 @@
   "package": "com.nexora.client.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "NoNarratorMixin",
     "ReachMixin",
-    "FPSMixin",
     "FullbrightMixin",
+    "FPSMixin",
     "MainMenuMixin",
     "HurtcamMixin",
     "MotionBlurMixin",
-    "NexoraOptimizerMixin",
-    "NoNarratorMixin"
-    
+    "NexoraOptimizerMixin"
   ],
   "injectors": {
     "defaultRequire": 1
