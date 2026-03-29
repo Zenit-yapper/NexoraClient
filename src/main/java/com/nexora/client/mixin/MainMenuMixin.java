@@ -18,16 +18,16 @@ public class MainMenuMixin {
         int w = context.getScaledWindowWidth();
         int h = context.getScaledWindowHeight();
 
-        // 1. Moon Animation
+        // Moon
         long time = System.currentTimeMillis() / 50;
         int moonX = (int) (time % (w + 200)) - 100;
         drawCircle(context, moonX, 60, 20, 0xFFEEEEEE);
 
-        // 2. Mountains
+        // Mountains
         drawMountains(context, w, h, 0xCC1a1a1a, 70, 0.01);
         drawMountains(context, w, h, 0xFF2d2d2d, 40, 0.02);
 
-        // 3. Centered Nexora Title
+        // Logo
         String title = "NEXORA CLIENT";
         int textX = (w / 2) - (client.textRenderer.getWidth(title) / 2);
         context.drawText(client.textRenderer, Formatting.AQUA + title, textX, (h / 2) - 10, 0xFFFFFF, true);
