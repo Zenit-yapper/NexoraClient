@@ -9,28 +9,39 @@ import net.minecraft.client.MinecraftClient;
 import org.lwjgl.glfw.GLFW;
 
 public class NexoraClient implements ClientModInitializer, ModInitializer {
+    // This variable fixes the "cannot find symbol" error in your ClickGui
     public static boolean fullbright = false;
 
     @Override
     public void onInitialize() {
-        // Essential to prevent the 'main class' crash
+        // This method satisfies the "main" entrypoint in fabric.mod.json
+        // It prevents the "ClassCastException" crash during startup
     }
 
     @Override
     public void onInitializeClient() {
+        // 1. Key Listener to open the Menu
+        // On Mojo Launcher, map a button to Right Shift (Code 6036)
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            // Right Shift (Mojo 6036) opens the menu
             while (client.options.allKeys[GLFW.GLFW_KEY_RIGHT_SHIFT].wasPressed()) {
                 if (client.player != null && client.currentScreen == null) {
                     client.setScreen(new ClickGuiScreen());
                 }
             }
+            
+            // Fullbright Logic
+            if (fullbright && client.options != null) {
+                client.options.getGamma().setValue(10.0);
+            }
         });
 
+        // 2. HUD Rendering for Branding & FPS
         HudRenderCallback.EVENT.register((context, tickDelta) -> {
             MinecraftClient client = MinecraftClient.getInstance();
             if (client.player == null || client.options.hudHidden) return;
-            context.fill(5, 5, 105, 18, 0x99000000);
+
+            // Simple top-left branding
+            context.fill(5, 5, 105, 18, 0x99000000); // Black transparent box
             context.drawText(client.textRenderer, "§b§lNEXORA §8| §f" + client.getCurrentFps(), 10, 8, -1, false);
         });
     }
