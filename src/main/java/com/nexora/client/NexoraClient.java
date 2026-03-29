@@ -14,10 +14,13 @@ public class NexoraClient implements ModInitializer, ClientModInitializer {
     public static KeyBinding guiKey;
 
     @Override
-    public void onInitialize() {}
+    public void onInitialize() {
+        // Required for 'main' entrypoint
+    }
 
     @Override
     public void onInitializeClient() {
+        // Required for 'client' entrypoint
         guiKey = KeyBindingHelper.registerKeyBinding(new KeyBinding(
                 "key.nexora.gui", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_RIGHT_SHIFT, "Nexora"
         ));
