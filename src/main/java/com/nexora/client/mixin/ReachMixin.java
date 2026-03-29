@@ -11,6 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class ReachMixin {
     @Inject(method = "getEntityInteractionRange", at = @At("HEAD"), cancellable = true)
     private void onReach(CallbackInfoReturnable<Double> cir) {
+        // Added (double) cast to fix the descriptor warning
         cir.setReturnValue((double) ClickGuiScreen.reachDistance);
     }
 }
