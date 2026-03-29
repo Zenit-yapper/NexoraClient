@@ -1,14 +1,12 @@
 {
   "required": true,
   "package": "com.nexora.client.mixin",
-  "compatibilityLevel": "JAVA_21",
+  "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "FullbrightMixin",
-    "MotionBlurMixin",
-    "MainMenuMixin",
+    "ReachMixin",
     "FPSMixin",
-    "HurtcamMixin",
-    "ReachMixin"
+    "FullbrightMixin",
+    "MainMenuMixin"
   ],
   "injectors": {
     "defaultRequire": 1
