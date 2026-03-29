@@ -13,12 +13,13 @@ public class NexoraClient implements ClientModInitializer, ModInitializer {
 
     @Override
     public void onInitialize() {
-        // Required to fix the "cannot be cast to ModInitializer" crash
+        // Essential to prevent the 'main class' crash
     }
 
     @Override
     public void onInitializeClient() {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
+            // Right Shift (Mojo 6036) opens the menu
             while (client.options.allKeys[GLFW.GLFW_KEY_RIGHT_SHIFT].wasPressed()) {
                 if (client.player != null && client.currentScreen == null) {
                     client.setScreen(new ClickGuiScreen());
