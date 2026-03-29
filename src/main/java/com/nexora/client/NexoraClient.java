@@ -13,7 +13,7 @@ public class NexoraClient implements ClientModInitializer, ModInitializer {
 
     @Override
     public void onInitialize() {
-        // This method must exist to satisfy the 'main' entrypoint
+        // This method must exist to satisfy the 'main' entrypoint and prevent crashes
     }
 
     @Override
