@@ -10,9 +10,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class NoNarratorMixin {
     @Inject(method = "isActive", at = @At("HEAD"), cancellable = true)
     private void disableNarrator(CallbackInfoReturnable<Boolean> cir) {
-        // This forces the game to think the narrator is always OFF
-        // so it never tries to load the broken libflite.so library.
+        // Forces the game to think the narrator is unavailable
+        // This prevents the game from looking for libflite.so
         cir.setReturnValue(false);
     }
 }
-
