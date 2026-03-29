@@ -6,21 +6,25 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.Text;
 
 public class ClickGuiScreen extends Screen {
+    // These fix the build errors in your Hitbox and Reach Mixins
+    public static double hitboxSize = 0.5;
+    public static float reachDistance = 3.0f;
+
     public ClickGuiScreen() { super(Text.literal("Nexora")); }
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         this.renderBackground(context, mouseX, mouseY, delta);
         
-        // GUI Box
-        context.fill(50, 50, 170, 130, 0xCC000000); 
-        context.fill(50, 50, 170, 65, 0xFF00E5FF); // Header
-        context.drawText(textRenderer, "NEXORA MODS", 55, 54, 0xFFFFFF, true);
+        // Main Box
+        context.fill(50, 50, 180, 150, 0xCC000000); 
+        context.fill(50, 50, 180, 65, 0xFF00E5FF); 
+        context.drawText(textRenderer, "NEXORA CONTROLS", 55, 54, 0xFFFFFF, true);
 
-        // Module Buttons
-        drawBtn(context, "Fullbright", 55, 70, NexoraClient.fullbright);
-        drawBtn(context, "FPS Boost", 55, 85, NexoraClient.fastRender);
-        drawBtn(context, "Hitboxes (WIP)", 55, 100, false);
+        // Buttons
+        drawBtn(context, "Fullbright", 55, 75, NexoraClient.fullbright);
+        drawBtn(context, "FPS Boost", 55, 95, NexoraClient.fastRender);
+        context.drawText(textRenderer, "Hitbox: " + hitboxSize, 55, 115, 0xFFFFFF, true);
     }
 
     private void drawBtn(DrawContext context, String name, int x, int y, boolean on) {
@@ -29,10 +33,9 @@ public class ClickGuiScreen extends Screen {
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        // Toggle Fullbright (Simple coordinate check)
         if (mouseX >= 55 && mouseX <= 150) {
-            if (mouseY >= 70 && mouseY <= 80) NexoraClient.fullbright = !NexoraClient.fullbright;
-            if (mouseY >= 85 && mouseY <= 95) NexoraClient.fastRender = !NexoraClient.fastRender;
+            if (mouseY >= 75 && mouseY <= 85) NexoraClient.fullbright = !NexoraClient.fullbright;
+            if (mouseY >= 95 && mouseY <= 105) NexoraClient.fastRender = !NexoraClient.fastRender;
         }
         return super.mouseClicked(mouseX, mouseY, button);
     }
