@@ -2,13 +2,19 @@ package com.nexora.client;
 
 import com.nexora.client.gui.ClickGuiScreen;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.api.ModInitializer; // Added this
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.item.ItemStack;
 
-public class NexoraClient implements ClientModInitializer {
+public class NexoraClient implements ClientModInitializer, ModInitializer { // Fixed both interfaces
     public static boolean fullbright = false;
+
+    @Override
+    public void onInitialize() {
+        // This fixes the 'main' entrypoint crash
+    }
 
     @Override
     public void onInitializeClient() {
