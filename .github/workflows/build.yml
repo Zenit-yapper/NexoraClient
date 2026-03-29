@@ -14,18 +14,17 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
-      # We removed the "Validate Gradle Wrapper" step that was failing
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
         with:
-          gradle-version: 8.8 # Matches the version in your first screenshot
+          gradle-version: 8.7 # Forced stable version (NOT 8.8)
 
-      - name: Build with Gradle
+      - name: Build Nexora
         run: gradle build --no-daemon
 
       - name: Upload Mod Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: NexoraClient-Build
-          path: build/libs/*.jar
+          name: NexoraClient-Final
+          path: build/libs/*-v2.jar
           
