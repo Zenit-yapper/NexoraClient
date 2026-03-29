@@ -3,11 +3,13 @@
   "minVersion": "0.8",
   "package": "com.nexora.client.mixin",
   "compatibilityLevel": "JAVA_21",
-  "mixins": [
+    "mixins": [
     "NexoraOptimizerMixin",
     "FullbrightMixin",
     "MotionBlurMixin",
-    "MainMenuMixin"
+    "MainMenuMixin",
+    "ReachMixin",
+    "HitboxMixin"
   ],
   "injectors": {
     "defaultRequire": 1
