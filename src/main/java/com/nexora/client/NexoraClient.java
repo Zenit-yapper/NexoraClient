@@ -11,13 +11,13 @@ public class NexoraClient implements ModInitializer, ClientModInitializer {
 
     @Override
     public void onInitialize() {
-        // This is the "Main" entrypoint the launcher is looking for
+        // This is the Main Entrypoint
         LOGGER.info("Nexora Client Main Initialized!");
     }
 
     @Override
     public void onInitializeClient() {
-        // This is the "Client" entrypoint for your HUD and GUI
+        // This is the Client Entrypoint
         LOGGER.info("Nexora Client Side Initialized!");
     }
 }
