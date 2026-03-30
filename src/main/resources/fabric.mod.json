@@ -3,6 +3,7 @@
   "id": "nexora_client",
   "version": "1.0.0",
   "name": "Nexora Client",
+  "description": "A perfect custom client for 1.21.1",
   "authors": ["Pratik"],
   "contact": {},
   "license": "MIT",
@@ -18,7 +19,7 @@
   "mixins": [
     "nexora_client.mixins.json"
   ],
-  "depends": {
+  "dependencies": {
     "fabricloader": ">=0.16.0",
     "minecraft": "1.21.1",
     "java": ">=17"
