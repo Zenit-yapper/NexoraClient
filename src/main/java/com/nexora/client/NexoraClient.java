@@ -11,13 +11,13 @@ public class NexoraClient implements ModInitializer, ClientModInitializer {
 
     @Override
     public void onInitialize() {
-        // This is the ONLY Main entrypoint needed
-        LOGGER.info("Nexora Client: Main System Loaded!");
+        // This handles the Main entrypoint for the Fabric Loader
+        LOGGER.info("Nexora Client: Main System Initialized!");
     }
 
     @Override
     public void onInitializeClient() {
-        // This is the ONLY Client entrypoint needed
-        LOGGER.info("Nexora Client: Client Graphics Loaded!");
+        // This handles the Client-side features (HUD, Mixins, etc.)
+        LOGGER.info("Nexora Client: Client-Side Initialized!");
     }
 }
