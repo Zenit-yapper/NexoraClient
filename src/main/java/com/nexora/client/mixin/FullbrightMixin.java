@@ -10,6 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class FullbrightMixin {
     @Inject(method = "getBrightness", at = @At("HEAD"), cancellable = true)
     private static void onGetBrightness(CallbackInfoReturnable<Float> cir) {
-        cir.setReturnValue(15.0f); 
+        // This forces the game to stay at maximum brightness (15.0)
+        cir.setReturnValue(15.0f);
     }
 }
