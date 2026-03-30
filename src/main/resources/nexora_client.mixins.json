@@ -6,7 +6,9 @@
     "NoNarratorMixin",
     "MainMenuMixin",
     "MotionBlurMixin",
-    "NexoraOptimizerMixin"
+    "NexoraOptimizerMixin",
+    "AutoSprintMixin",
+    "NoFireOverlayMixin"
   ],
   "injectors": {
     "defaultRequire": 1
