@@ -8,8 +8,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(GameRenderer.class)
 public class HurtcamMixin {
-    @Inject(method = "tiltViewWhenHurt", at = @At("HEAD"), cancellable = true)
-    private void removeShake(CallbackInfo ci) {
-        ci.cancel(); // Removes camera shake when taking damage
+    @Inject(method = "bobViewWhenHurt", at = @At("HEAD"), cancellable = true)
+    private void onHurtCam(CallbackInfo ci) {
+        ci.cancel(); // Stops the screen from shaking when you take damage
     }
 }
