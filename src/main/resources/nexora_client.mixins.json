@@ -6,7 +6,6 @@
     "NoNarratorMixin",
     "FPSMixin",
     "MainMenuMixin",
-    "HurtcamMixin",
     "MotionBlurMixin",
     "NexoraOptimizerMixin"
   ],
