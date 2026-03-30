@@ -1,4 +1,4 @@
-package com.nexora.client.mixin;
+package com.nexora.client.mixin; // Must be mixin!
 
 import com.nexora.client.gui.ClickGuiScreen;
 import net.minecraft.client.MinecraftClient;
@@ -12,12 +12,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class BlurMixin {
     @Inject(method = "init", at = @At("HEAD"))
     private void onInit(CallbackInfo ci) {
+        // If the screen opening is your Nexora GUI, apply the blur
         if ((Object) this instanceof ClickGuiScreen) {
-            // Apply the built-in Minecraft blur shader
             MinecraftClient.getInstance().gameRenderer.loadPostProcessor(
                 new net.minecraft.util.Identifier("minecraft", "shaders/post/blur.json")
             );
         }
     }
 }
-
