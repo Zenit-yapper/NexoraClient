@@ -4,15 +4,22 @@
   "version": "1.0.0",
   "name": "Nexora Client",
   "authors": ["Pratik"],
+  "contact": {},
   "license": "MIT",
   "environment": "*",
   "entrypoints": {
-    "main": ["com.nexora.client.NexoraClient"],
-    "client": ["com.nexora.client.NexoraClient"]
+    "main": [
+      "com.nexora.client.NexoraClient"
+    ],
+    "client": [
+      "com.nexora.client.NexoraClient"
+    ]
   },
-  "mixins": ["nexora_client.mixins.json"],
+  "mixins": [
+    "nexora_client.mixins.json"
+  ],
   "depends": {
-    "fabricloader": ">=0.16.10",
+    "fabricloader": ">=0.16.0",
     "minecraft": "1.21.1",
     "java": ">=17"
   }
