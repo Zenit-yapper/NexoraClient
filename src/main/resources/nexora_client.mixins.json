@@ -4,8 +4,12 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "NoNarratorMixin",
-    "ReachMixin",
-    "FullbrightMixin"
+    "FullbrightMixin",
+    "FPSMixin",
+    "MainMenuMixin",
+    "HurtcamMixin",
+    "MotionBlurMixin",
+    "NexoraOptimizerMixin"
   ],
   "injectors": {
     "defaultRequire": 1
