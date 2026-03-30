@@ -8,7 +8,9 @@
     "MotionBlurMixin",
     "NexoraOptimizerMixin",
     "AutoSprintMixin",
-    "NoFireOverlayMixin"
+    "NoFireOverlayMixin",
+    "InGameHudMixin",
+    "BlurMixin"
   ],
   "injectors": {
     "defaultRequire": 1
