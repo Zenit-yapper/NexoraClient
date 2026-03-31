@@ -3,74 +3,49 @@ package com.nexora.client.gui;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.Text;
-import java.awt.Color;
 
 public class ClickGuiScreen extends Screen {
-    public ClickGuiScreen() {
-        super(Text.literal("Nexora Dashboard"));
-    }
+    public ClickGuiScreen() { super(Text.literal("Nexora Dashboard")); }
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        // Professional darkened background (90% opacity)
-        context.fill(0, 0, this.width, this.height, 0xE6000000);
+        // Professional Dark Tint (75% Opacity)
+        context.fill(0, 0, this.width, this.height, 0xBF000000);
 
-        int x = this.width / 2 - 120;
-        int y = this.height / 2 - 90;
-        int width = 240;
-        int height = 180;
+        int centerX = this.width / 2;
+        int centerY = this.height / 2;
 
-        // 1. Main Frame Shadow/Glow
-        context.fill(x - 1, y - 1, x + width + 1, y + height + 1, 0xFF333333); 
+        // Main Panel: Deep Charcoal with a Purple Glow Border
+        context.fill(centerX - 122, centerY - 102, centerX + 122, centerY + 102, 0xFFCC00FF); // Purple Border
+        context.fill(centerX - 120, centerY - 100, centerX + 120, centerY + 100, 0xFF0D0D0D); // Main Body
+
+        // Header Section
+        context.fill(centerX - 120, centerY - 100, centerX + 120, centerY - 75, 0xFF151515);
+        context.drawCenteredTextWithShadow(this.textRenderer, "§d§lNEXORA §f| §7v1.0", centerX, centerY - 92, 0xFFFFFFFF);
+
+        // Sidebar Divider
+        context.fill(centerX - 120, centerY - 75, centerX - 60, centerY + 100, 0xFF111111);
+        context.drawTextWithShadow(this.textRenderer, "§dCombat", centerX - 110, centerY - 60, 0xFFFFFF);
+        context.drawTextWithShadow(this.textRenderer, "Visual", centerX - 110, centerY - 40, 0xAAAAAA);
+        context.drawTextWithShadow(this.textRenderer, "Player", centerX - 110, centerY - 20, 0xAAAAAA);
+
+        // Module Rows (Professional spacing)
+        drawModuleRow(context, "Auto Sprint", centerX - 55, centerY - 65, true);
+        drawModuleRow(context, "No Fall", centerX - 55, centerY - 40, true);
+        drawModuleRow(context, "Fast Place", centerX - 55, centerY - 15, true);
+        drawModuleRow(context, "Motion Blur", centerX - 55, centerY + 10, true);
+        drawModuleRow(context, "Reach Display", centerX - 55, centerY + 35, true);
         
-        // 2. Main Body
-        context.fill(x, y, x + width, y + height, 0xFF0F0F0F);
-
-        // 3. Header with Professional Gradient Logic
-        renderHeader(context, x, y, width);
-
-        // 4. Category Sidebar (Static Visual)
-        context.fill(x, y + 22, x + 60, y + height, 0xFF151515);
-        context.drawTextWithShadow(this.textRenderer, "COMBAT", x + 10, y + 35, 0xBBBBBB);
-        context.drawTextWithShadow(this.textRenderer, "VISUAL", x + 10, y + 55, 0xFFCC00FF); // Active category
-        context.drawTextWithShadow(this.textRenderer, "PLAYER", x + 10, y + 75, 0xBBBBBB);
-
-        // 5. Module List (High-End Layout)
-        int slotY = y + 30;
-        drawModule(context, "Motion Blur", x + 70, slotY, true, mouseX, mouseY);
-        drawModule(context, "Auto Sprint", x + 70, slotY + 25, true, mouseX, mouseY);
-        drawModule(context, "No Fall", x + 70, slotY + 50, true, mouseX, mouseY);
-        drawModule(context, "Fast Place", x + 70, slotY + 75, true, mouseX, mouseY);
-        drawModule(context, "Reach Display", x + 70, slotY + 100, true, mouseX, mouseY);
-
         super.render(context, mouseX, mouseY, delta);
     }
 
-    private void renderHeader(DrawContext context, int x, int y, int width) {
-        // Purple Accent bar
-        context.fill(x, y, x + width, y + 22, 0xFF1A1A1A);
-        context.fill(x, y + 20, x + width, y + 22, 0xFFCC00FF);
+    private void drawModuleRow(DrawContext context, String name, int x, int y, boolean active) {
+        // High-end Row Styling
+        context.fill(x, y, x + 170, y + 20, 0x1AFFFFFF);
+        context.drawTextWithShadow(this.textRenderer, name, x + 8, y + 6, 0xFFFFFF);
         
-        context.drawTextWithShadow(this.textRenderer, "NEXORA", x + 10, y + 6, 0xFFFFFF);
-        context.drawTextWithShadow(this.textRenderer, "v1.0.0-STABLE", x + width - 75, y + 6, 0x777777);
-    }
-
-    private void drawModule(DrawContext context, String name, int x, int y, boolean enabled, int mx, int my) {
-        boolean hovering = (mx >= x && mx <= x + 160 && my >= y && my <= y + 20);
-        
-        // Background - highlight if hovering
-        int bgColor = hovering ? 0x40FFFFFF : 0x10FFFFFF;
-        context.fill(x, y, x + 160, y + 20, bgColor);
-        
-        // Status indicator dot
-        int dotColor = enabled ? 0xFFCC00FF : 0xFF444444;
-        context.fill(x + 5, y + 8, x + 9, y + 12, dotColor);
-
-        context.drawTextWithShadow(this.textRenderer, name, x + 15, y + 6, 0xFFFFFF);
-        
-        if (enabled) {
-            context.drawTextWithShadow(this.textRenderer, "ACTIVE", x + 120, y + 6, 0x55FF55);
-        }
+        String statusText = active ? "§a[ON]" : "§c[OFF]";
+        context.drawTextWithShadow(this.textRenderer, statusText, x + 162 - this.textRenderer.getWidth(statusText), y + 6, 0xFFFFFF);
     }
 
     @Override
