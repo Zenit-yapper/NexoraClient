@@ -1,30 +1,24 @@
 package com.nexora.client.mixin;
 
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.hud.InGameHud;
-import net.minecraft.client.render.RenderTickCounter;
-import net.minecraft.item.ItemStack;
+import net.minecraft.util.hit.EntityHitResult;
+import net.minecraft.util.hit.HitResult;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(InGameHud.class)
-public class ArmorStatusMixin {
-    @Inject(method = "render", at = @At("TAIL"))
-    private void renderArmorStatus(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
+@Mixin(MinecraftClient.class)
+public class ReachDisplayMixin {
+    @Inject(method = "doAttack", at = @At("HEAD"))
+    private void onDoAttack(CallbackInfoReturnable<Boolean> cir) {
         MinecraftClient client = MinecraftClient.getInstance();
-        if (client.player == null || client.options.hudHidden) return;
-
-        int y = context.getScaledWindowHeight() / 2 - 40;
-        for (ItemStack stack : client.player.getArmorItems()) {
-            if (!stack.isEmpty()) {
-                context.drawItem(stack, 5, y);
-                // Correct 1.21.1 method for durability bars and stack counts
-                context.drawItemInGuiWithOverrides(client.textRenderer, stack, 5, y);
-                y += 20;
-            }
+        if (client.crosshairTarget != null && client.crosshairTarget.getType() == HitResult.Type.ENTITY) {
+            EntityHitResult entityHit = (EntityHitResult) client.crosshairTarget;
+            double distance = client.player.getEyePos().distanceTo(entityHit.getPos());
+            
+            // Shows reach distance in the action bar (above the hotbar)
+            client.player.sendMessage(net.minecraft.text.Text.literal("§dReach: §f" + String.format("%.2f", distance)), true);
         }
     }
 }
