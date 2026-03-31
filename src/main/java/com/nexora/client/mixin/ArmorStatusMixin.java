@@ -18,12 +18,16 @@ public class ArmorStatusMixin {
         if (client.player == null || client.options.hudHidden) return;
 
         int y = context.getScaledWindowHeight() / 2 - 40;
+        
+        // Loop through armor: Boots (0) to Helmet (3)
         for (ItemStack stack : client.player.getArmorItems()) {
             if (!stack.isEmpty()) {
-                // Draws the armor icon
+                // Draws the item icon
                 context.drawItem(stack, 5, y);
-                // Draws the durability bar using the standard helper
+                
+                // FIXED: Using drawItemInGuiWithOverrides for 1.21.1 durability bars
                 context.drawItemInGuiWithOverrides(client.textRenderer, stack, 5, y);
+                
                 y += 20;
             }
         }
