@@ -15,7 +15,9 @@
     "DirectionHudMixin",
     "ReachDisplayMixin",
     "FastPlaceMixin",
-    "FastStopMixin"
+    "FastStopMixin",
+    "VelocityMixin",
+    "ClearWaterMixin"
   ],
   "injectors": {
     "defaultRequire": 1
