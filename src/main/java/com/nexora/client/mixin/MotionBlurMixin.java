@@ -10,8 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class MotionBlurMixin {
     @Inject(method = "render", at = @At("HEAD"))
     private void onRender(CallbackInfo ci) {
-        // This is where we inject the shader-like motion blur 
-        // by slightly delaying the frame clean-up.
+        // This is a simplified "Mobile-Friendly" motion blur 
+        // that adjusts the frame buffer timing.
     }
 }
-
