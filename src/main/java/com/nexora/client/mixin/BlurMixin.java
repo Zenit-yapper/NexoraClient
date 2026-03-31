@@ -14,18 +14,17 @@ public class BlurMixin {
     
     @Inject(method = "init", at = @At("HEAD"))
     private void onInit(CallbackInfo ci) {
-        // Use 'this' casted to Object to check the instance
         if ((Object) this instanceof ClickGuiScreen) {
             MinecraftClient client = MinecraftClient.getInstance();
-            // Using the modern 1.21.1 Identifier method
+            // Modern 1.21.1 way to load shaders
             client.gameRenderer.loadPostProcessor(Identifier.of("minecraft", "shaders/post/blur.json"));
         }
     }
 
     @Inject(method = "removed", at = @At("HEAD"))
     private void onRemoved(CallbackInfo ci) {
-        // Turns off the blur when you close the menu
         if ((Object) this instanceof ClickGuiScreen) {
+            // Disable blur when closing the GUI
             MinecraftClient.getInstance().gameRenderer.disablePostProcessor();
         }
     }
