@@ -9,11 +9,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(GameRenderer.class)
 public class GameRendererMixin {
-
+    
     @Inject(method = "loadPostProcessor", at = @At("HEAD"), cancellable = true)
     private void stopVanillaBlur(Identifier id, CallbackInfo ci) {
-        // This is the core fix. It prevents the 'menu_blur' shader 
-        // from ever initializing on your Mali GPU.
+        // If the game tries to load the 'blur' shader, we cancel it immediately.
+        // This ensures your RShift menu remains 100% clear.
         if (id.getPath().contains("blur")) {
             ci.cancel();
         }
