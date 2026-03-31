@@ -16,7 +16,10 @@
     "ClearWaterMixin",
     "NoBlurMixin",
     "GameRendererMixin",
-    "PermanentClearMixin"
+    "PermanentClearMixin",
+    "NoSlowMixin",
+    "OmniSprintMixin",
+    
   ],
   "injectors": {
     "defaultRequire": 1
