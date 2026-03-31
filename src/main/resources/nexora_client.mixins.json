@@ -11,7 +11,11 @@
     "NoFireOverlayMixin",
     "InGameHudMixin",
     "BlurMixin",
-    "GameRendererAccessor"
+    "GameRendererAccessor",
+    "FastPlaceMixin",
+    "DirectionHudMixin",
+    "ReachDisplayMixin",
+    "FastPlaceMixin"
   ],
   "injectors": {
     "defaultRequire": 1
