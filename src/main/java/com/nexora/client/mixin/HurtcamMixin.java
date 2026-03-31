@@ -8,9 +8,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(GameRenderer.class)
 public class HurtcamMixin {
-    // We use the Intermediary name 'method_3174' for 1.21.1 to prevent the injection error
-    @Inject(method = "bobViewWhenHurt", at = @At("HEAD"), cancellable = true, remap = true)
-    private void onHurtCam(CallbackInfo ci) {
-        ci.cancel(); 
+    // Fixed method name for 1.21.1
+    @Inject(method = "bobView", at = @At("HEAD"), cancellable = true)
+    private void onBobView(CallbackInfo ci) {
+        ci.cancel(); // This disables the screen shake
     }
 }
