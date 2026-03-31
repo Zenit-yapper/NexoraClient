@@ -13,7 +13,8 @@
     "DirectionHudMixin",
     "ReachDisplayMixin",
     "FastPlaceMixin",
-    "ClearWaterMixin"
+    "ClearWaterMixin",
+    "NoBlurMixin"
   ],
   "injectors": {
     "defaultRequire": 1
