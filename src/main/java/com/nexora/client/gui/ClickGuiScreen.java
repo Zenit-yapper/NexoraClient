@@ -3,8 +3,7 @@ package com.nexora.client.gui;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.Text;
-
-import java.awt.Color;
+import net.minecraft.util.math.MathHelper;
 
 public class ClickGuiScreen extends Screen {
     public ClickGuiScreen() {
@@ -13,22 +12,23 @@ public class ClickGuiScreen extends Screen {
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        // 1. Darken the background (The BlurMixin handles the actual blur)
+        // 1. Background Overlay
         context.fill(0, 0, this.width, this.height, 0x70000000);
 
         int centerX = this.width / 2;
         int centerY = this.height / 2;
+        long time = System.currentTimeMillis();
 
-        // 2. Draw Main Panel (The "Feather" Glass Box)
-        // Main Background
-        drawRoundedRect(context, centerX - 110, centerY - 80, centerX + 110, centerY + 90, 0x90101010);
-        // Thin Outline for that "Pro" look
-        drawOutline(context, centerX - 110, centerY - 80, centerX + 110, centerY + 90, 0xFF444444);
+        // 2. THE ANIMATED RINGS (Saturn Effect)
+        renderSaturnRings(context, centerX, centerY - 72, time);
 
-        // 3. Title with Pink/Purple Glow (Like your reference)
+        // 3. Main Panel
+        drawStyledBox(context, centerX - 110, centerY - 80, centerX + 110, centerY + 90);
+
+        // 4. Title
         context.drawCenteredTextWithShadow(this.textRenderer, "NEXORA CLIENT", centerX, centerY - 72, 0xFF55FF);
 
-        // 4. Render Module Buttons (Examples)
+        // 5. Render Modules
         drawModule(context, "Auto Sprint", centerX - 100, centerY - 50, true);
         drawModule(context, "No Hurtcam", centerX - 100, centerY - 25, true);
         drawModule(context, "Fullbright", centerX - 100, centerY, false);
@@ -37,36 +37,21 @@ public class ClickGuiScreen extends Screen {
         super.render(context, mouseX, mouseY, delta);
     }
 
-    private void drawModule(DrawContext context, String name, int x, int y, boolean enabled) {
-        int width = 200;
-        int height = 20;
-        
-        // Button Background (Semi-transparent white/grey)
-        context.fill(x, y, x + width, y + height, 0x30FFFFFF);
-        
-        // Module Name
-        context.drawTextWithShadow(this.textRenderer, name, x + 10, y + 6, 0xFFFFFF);
-        
-        // Toggle Switch (Right Side)
-        String status = enabled ? "ON" : "OFF";
-        int statusColor = enabled ? 0xFF55FF55 : 0xFFFF5555;
-        context.drawTextWithShadow(this.textRenderer, status, x + width - 30, y + 6, statusColor);
-    }
+    private void renderSaturnRings(DrawContext context, int centerX, int centerY, long time) {
+        int particleCount = 12; // Number of stars in the ring
+        float radiusX = 60f;    // Width of the ring
+        float radiusY = 15f;    // Height (tilt) of the ring
 
-    // Helper methods for professional styling
-    private void drawRoundedRect(DrawContext context, int x1, int y1, int x2, int y2, int color) {
-        context.fill(x1, y1, x2, y2, color);
-    }
+        for (int i = 0; i < particleCount; i++) {
+            // Calculate orbit position using time for smooth movement
+            double angle = (time / 1000.0 * 2.0 + (i * (Math.PI * 2 / particleCount)));
+            
+            int x = centerX + (int) (Math.cos(angle) * radiusX);
+            int y = centerY + (int) (Math.sin(angle) * radiusY);
 
-    private void drawOutline(DrawContext context, int x1, int y1, int x2, int y2, int color) {
-        context.fill(x1, y1, x2, y1 + 1, color); // Top
-        context.fill(x1, y2 - 1, x2, y2, color); // Bottom
-        context.fill(x1, y1, x1 + 1, y2, color); // Left
-        context.fill(x2 - 1, y1, x2, y2, color); // Right
-    }
-
-    @Override
-    public boolean shouldPause() {
-        return false; // Allows the game to keep running in the background
-    }
-}
+            // Draw a glowing "star" particle
+            // We use a small 2x2 square to look like a star
+            context.fill(x, y, x + 2, y + 2, 0xCCFF55FF); 
+            
+            // Add a second
+        
