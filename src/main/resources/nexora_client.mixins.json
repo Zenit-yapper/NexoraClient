@@ -5,7 +5,6 @@
   "mixins": [
     "NoNarratorMixin",
     "MainMenuMixin",
-    "MotionBlurMixin",
     "NexoraOptimizerMixin",
     "AutoSprintMixin",
     "NoFireOverlayMixin",
