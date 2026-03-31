@@ -16,7 +16,7 @@ public class BlurMixin {
     private void onInit(CallbackInfo ci) {
         if ((Object) this instanceof ClickGuiScreen) {
             MinecraftClient client = MinecraftClient.getInstance();
-            // We use the Accessor here to call the private method
+            // Use the Accessor to load the shader safely
             ((GameRendererAccessor) client.gameRenderer).invokeLoadPostProcessor(
                 Identifier.of("minecraft", "shaders/post/blur.json")
             );
@@ -26,6 +26,7 @@ public class BlurMixin {
     @Inject(method = "removed", at = @At("HEAD"))
     private void onRemoved(CallbackInfo ci) {
         if ((Object) this instanceof ClickGuiScreen) {
+            // This is CRITICAL: It clears the blur so you can see your gameplay again
             MinecraftClient.getInstance().gameRenderer.disablePostProcessor();
         }
     }
