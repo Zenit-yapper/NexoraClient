@@ -11,9 +11,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class GameRendererMixin {
 
     @Inject(method = "loadPostProcessor", at = @At("HEAD"), cancellable = true)
-    private void onLoadPostProcessor(Identifier id, CallbackInfo ci) {
-        // If the game tries to load the 'blur' or 'phosphor' shader, we stop it.
-        // This keeps the GUI 100% clear and saves FPS on Mali GPUs.
+    private void stopVanillaBlur(Identifier id, CallbackInfo ci) {
+        // This is the core fix. It prevents the 'menu_blur' shader 
+        // from ever initializing on your Mali GPU.
         if (id.getPath().contains("blur")) {
             ci.cancel();
         }
