@@ -16,8 +16,7 @@
     "ClearWaterMixin",
     "NoBlurMixin",
     "GameRendererMixin",
-    "PermanentClearMixin",
-    "ZoomMixin"
+    "PermanentClearMixin"
   ],
   "injectors": {
     "defaultRequire": 1
