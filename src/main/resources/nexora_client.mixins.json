@@ -14,7 +14,8 @@
     "ReachDisplayMixin",
     "FastPlaceMixin",
     "ClearWaterMixin",
-    "NoBlurMixin"
+    "NoBlurMixin",
+    "GameRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
