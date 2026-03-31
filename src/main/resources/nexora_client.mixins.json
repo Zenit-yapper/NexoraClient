@@ -15,7 +15,6 @@
     "FastPlaceMixin",
     "DirectionHudMixin",
     "ReachDisplayMixin",
-    "HurtcamMixin",
     "FastPlaceMixin"
   ],
   "injectors": {
