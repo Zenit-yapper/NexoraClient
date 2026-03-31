@@ -15,7 +15,8 @@
     "FastPlaceMixin",
     "DirectionHudMixin",
     "ReachDisplayMixin",
-    "FastPlaceMixin"
+    "FastPlaceMixin",
+    "FullbrightMixin"
   ],
   "injectors": {
     "defaultRequire": 1
