@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(GameRenderer.class)
 public class HurtcamMixin {
-    // We use the intermediary name 'method_3174' so the launcher can find it
+    // method_3174 is the Intermediary name for bobViewWhenHurt
     @Inject(method = "method_3174", at = @At("HEAD"), cancellable = true)
     private void onHurtcam(CallbackInfo ci) {
         ci.cancel();
