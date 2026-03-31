@@ -4,7 +4,6 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.render.RenderTickCounter;
-import net.minecraft.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -20,30 +19,29 @@ public class ComboCounterMixin {
         MinecraftClient client = MinecraftClient.getInstance();
         if (client.player == null || client.options.hudHidden) return;
 
-        // Reset combo if 2 seconds pass without a hit
-        if (System.currentTimeMillis() - lastHitTime > 2000) {
+        // Reset combo if you haven't hit anyone in 2.5 seconds
+        if (System.currentTimeMillis() - lastHitTime > 2500) {
             comboCount = 0;
         }
 
         if (comboCount > 0) {
             String text = "Combo: " + comboCount;
+            // Positioned near the crosshair like your other HUD elements
             int x = context.getScaledWindowWidth() / 2 + 10;
             int y = context.getScaledWindowHeight() / 2 + 10;
-            context.drawTextWithShadow(client.textRenderer, text, x, y, 0xFFCC00FF); // Nexora Purple
+            context.drawTextWithShadow(client.textRenderer, text, x, y, 0xFFCC00FF);
         }
     }
 
-    // This part records the hit to increase the counter
     @Inject(method = "tick", at = @At("HEAD"))
     private void onTick(CallbackInfo ci) {
         MinecraftClient client = MinecraftClient.getInstance();
+        // Detects if you successfully landed a hit on an entity
         if (client.attackIndicatorTickCounter > 0 && client.targetedEntity != null) {
-            // We only count it as a combo if it's a fresh hit
-            if (System.currentTimeMillis() - lastHitTime > 100) {
+            if (System.currentTimeMillis() - lastHitTime > 150) {
                 comboCount++;
                 lastHitTime = System.currentTimeMillis();
             }
         }
     }
 }
-
