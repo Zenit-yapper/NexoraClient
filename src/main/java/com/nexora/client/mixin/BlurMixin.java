@@ -14,24 +14,17 @@ public class BlurMixin {
     
     @Inject(method = "init", at = @At("HEAD"))
     private void onInit(CallbackInfo ci) {
-        // Checks if the screen opening is your Nexora ClickGUI
+        // Use 'this' casted to Object to check the instance
         if ((Object) this instanceof ClickGuiScreen) {
             MinecraftClient client = MinecraftClient.getInstance();
-            
-            // This loads the internal Minecraft Blur Shader
-            // It makes the background look professional like Feather/Lunar
-            if (client.gameRenderer.getPostProcessor() == null) {
-                client.gameRenderer.loadPostProcessor(
-                    Identifier.of("minecraft", "shaders/post/blur.json")
-                );
-            }
+            // Using the modern 1.21.1 Identifier method
+            client.gameRenderer.loadPostProcessor(Identifier.of("minecraft", "shaders/post/blur.json"));
         }
     }
 
     @Inject(method = "removed", at = @At("HEAD"))
     private void onRemoved(CallbackInfo ci) {
-        // This removes the blur when you close the GUI 
-        // so your gameplay doesn't stay blurry!
+        // Turns off the blur when you close the menu
         if ((Object) this instanceof ClickGuiScreen) {
             MinecraftClient.getInstance().gameRenderer.disablePostProcessor();
         }
