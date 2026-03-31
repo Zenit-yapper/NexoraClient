@@ -10,37 +10,38 @@ public class ClickGuiScreen extends Screen {
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        // 1. Dark, clean background (No blur)
-        context.fill(0, 0, this.width, this.height, 0xFF0A0A0A);
+        // SOLID BLACK background. No transparency = No blur.
+        context.fill(0, 0, this.width, this.height, 0xFF080808);
 
         int cx = this.width / 2;
         int cy = this.height / 2;
 
-        // --- ANIMATION LOGIC ---
-        // We use System time to create a value that goes smoothly from 0 to 1
-        float tick = (System.currentTimeMillis() % 2000) / 2000f;
-        float opacity = MathHelper.sin(tick * (float)Math.PI * 2) * 0.5f + 0.5f;
-        
-        // Calculate a color that pulses between Dark Purple and Neon Pink
-        int pulseColor = (0xFF << 24) | ((int)(150 + (105 * opacity)) << 16) | (0 << 8) | 255;
+        // --- THE ANIMATION LOGIC ---
+        // Creates a pulse every 2 seconds
+        float pulse = (float) (Math.sin(System.currentTimeMillis() / 300.0) + 1) / 2;
+        // Pulse between deep purple and bright neon pink
+        int red = (int) (180 + (75 * pulse));
+        int blue = 255;
+        int pulseColor = (255 << 24) | (red << 16) | (0 << 8) | blue;
 
-        // 2. The Animated Header
+        // 1. The Pulsing Logo
         context.drawCenteredTextWithShadow(this.textRenderer, "§d§lNEXORA", cx, cy - 80, pulseColor);
         
-        // Decorative pulsing line under the logo
-        int lineWidth = (int)(40 + (60 * opacity)); 
+        // 2. Animated Underline (expands and contracts)
+        int lineWidth = (int) (30 + (50 * pulse));
         context.fill(cx - lineWidth, cy - 70, cx + lineWidth, cy - 69, pulseColor);
 
-        // 3. Module Rendering
-        renderModule(context, "Movement", cx, cy - 40);
-        renderModule(context, "Combat", cx, cy - 15);
-        renderModule(context, "Visuals", cx, cy + 10);
+        // 3. Module List
+        drawModule(context, "Movement", cx, cy - 40);
+        drawModule(context, "Visuals", cx, cy - 15);
+        drawModule(context, "Combat", cx, cy + 10);
 
         super.render(context, mouseX, mouseY, delta);
     }
 
-    private void renderModule(DrawContext context, String text, int x, int y) {
-        context.fill(x - 90, y, x + 90, y + 20, 0xFF151515);
-        context.drawTextWithShadow(this.textRenderer, text, x - 85, y + 6, 0xFFFFFFFF);
+    private void drawModule(DrawContext context, String name, int x, int y) {
+        context.fill(x - 90, y, x + 90, y + 20, 0xFF151515); // Solid Row
+        context.drawTextWithShadow(this.textRenderer, name, x - 85, y + 6, 0xFFFFFFFF);
+        context.drawTextWithShadow(this.textRenderer, "§7[TOGGLE]", x + 40, y + 6, 0xFFFFFFFF);
     }
 }
