@@ -20,10 +20,9 @@ public class ArmorStatusMixin {
         int y = context.getScaledWindowHeight() / 2 - 40;
         for (ItemStack stack : client.player.getArmorItems()) {
             if (!stack.isEmpty()) {
-                // 1. Draw the item icon
                 context.drawItem(stack, 5, y);
-                // 2. Draw the durability bar/stack count (Modern 1.21.1 method)
-                context.drawStackOverlay(client.textRenderer, stack, 5, y);
+                // Correct 1.21.1 method to draw durability and stack counts
+                context.drawItemInGuiWithOverrides(client.textRenderer, stack, 5, y);
                 y += 20;
             }
         }
