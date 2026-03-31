@@ -9,9 +9,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(GameRenderer.class)
 public class GameRendererMixin {
     @Inject(method = "loadPostProcessor", at = @At("HEAD"), cancellable = true)
-    private void stopShaders(CallbackInfo ci) {
-        // This force-cancels the blur shader before it even starts.
+    private void stopMenuBlur(CallbackInfo ci) {
+        // This stops the game from loading ANY post-processing shaders (like blur)
+        // when a screen is opened.
         ci.cancel();
     }
 }
-
