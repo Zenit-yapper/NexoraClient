@@ -10,7 +10,8 @@
     "AutoSprintMixin",
     "NoFireOverlayMixin",
     "InGameHudMixin",
-    "BlurMixin"
+    "BlurMixin",
+    "GameRendererAccessor"
   ],
   "injectors": {
     "defaultRequire": 1
