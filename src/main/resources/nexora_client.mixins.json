@@ -16,8 +16,7 @@
     "DirectionHudMixin",
     "ReachDisplayMixin",
     "FastPlaceMixin",
-    "SilentAimMixin",
-    "ComboCounterMixin"
+    "SilentAimMixin"
   ],
   "injectors": {
     "defaultRequire": 1
