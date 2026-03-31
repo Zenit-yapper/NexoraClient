@@ -15,8 +15,7 @@
     "FastPlaceMixin",
     "DirectionHudMixin",
     "ReachDisplayMixin",
-    "FastPlaceMixin",
-    "ArmorStatusMixin"
+    "FastPlaceMixin"
   ],
   "injectors": {
     "defaultRequire": 1
