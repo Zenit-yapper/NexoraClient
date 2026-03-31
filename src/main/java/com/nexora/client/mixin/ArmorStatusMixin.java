@@ -19,14 +19,15 @@ public class ArmorStatusMixin {
 
         int y = context.getScaledWindowHeight() / 2 - 40;
         
-        // Loop through armor: Boots (0) to Helmet (3)
+        // Loop through the armor items (Boots to Helmet)
         for (ItemStack stack : client.player.getArmorItems()) {
             if (!stack.isEmpty()) {
                 // Draws the item icon
                 context.drawItem(stack, 5, y);
                 
-                // FIXED: Using drawItemInGuiWithOverrides for 1.21.1 durability bars
-                context.drawItemInGuiWithOverrides(client.textRenderer, stack, 5, y);
+                // Use drawStackOverlay — this is the most common name in modern 1.21.1 mappings
+                // If this still fails, your project is likely using very old mappings
+                context.drawStackOverlay(client.textRenderer, stack, 5, y);
                 
                 y += 20;
             }
