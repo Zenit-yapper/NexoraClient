@@ -11,28 +11,26 @@ public class ClickGuiScreen extends Screen {
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        // Use a solid dark grey hex color (0xFF101010) to block out the world.
-        // This ensures NO blur or transparency glitches occur.
+        // 0xFF101010 is a solid, non-transparent dark grey.
+        // Using a solid color prevents the GPU from trying to render blur shaders.
         context.fill(0, 0, this.width, this.height, 0xFF101010);
 
         int centerX = this.width / 2;
         int centerY = this.height / 2;
 
-        // Static Title - No animations or pulsing to save CPU cycles.
         context.drawCenteredTextWithShadow(this.textRenderer, "NEXORA UTILITY", centerX, centerY - 80, 0xFFFFFFFF);
 
-        // Simple Module Categories
-        drawCategory(context, "Movement", centerX, centerY - 40);
-        drawCategory(context, "Combat", centerX, centerY - 10);
-        drawCategory(context, "Visual", centerX, centerY + 20);
+        // Simple, solid buttons
+        drawButton(context, "Combat", centerX, centerY - 40);
+        drawButton(context, "Movement", centerX, centerY - 10);
+        drawButton(context, "Visuals", centerX, centerY + 20);
 
         super.render(context, mouseX, mouseY, delta);
     }
 
-    private void drawCategory(DrawContext context, String name, int x, int y) {
-        // Solid boxes with no border effects.
-        context.fill(x - 80, y, x + 80, y + 20, 0xFF202020);
-        context.drawTextWithShadow(this.textRenderer, name, x - 75, y + 6, 0xFFBBBBBB);
+    private void drawButton(DrawContext context, String name, int x, int y) {
+        context.fill(x - 70, y, x + 70, y + 20, 0xFF252525);
+        context.drawTextWithShadow(this.textRenderer, name, x - 65, y + 6, 0xFFDDDDDD);
     }
 
     @Override
