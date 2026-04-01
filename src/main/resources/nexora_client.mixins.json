@@ -8,12 +8,10 @@
     "NexoraOptimizerMixin",
     "AutoSprintMixin",
     "NoFireOverlayMixin",
-    "InGameHudMixin",
     "GameRendererAccessor",
     "DirectionHudMixin",
     "ReachDisplayMixin",
-    "FastPlaceMixin",
-    "PermanentClearMixin"
+    "FastPlaceMixin"
   ],
   "injectors": {
     "defaultRequire": 1
