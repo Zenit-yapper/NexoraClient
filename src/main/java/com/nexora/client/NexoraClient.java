@@ -1,6 +1,6 @@
 package com.nexora.client;
 
-import net.fabricmc.api.ClientModInitializer; // This must be the Client version
+import net.fabricmc.api.ClientModInitializer; // This must be ClientModInitializer
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,7 +9,7 @@ public class NexoraClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        // This is the correct method name for a ClientModInitializer
-        LOGGER.info("Nexora Client 1.0.0 has initialized successfully on Android!");
+        // This is the specific method name required for a client entrypoint
+        LOGGER.info("Nexora Client: System initialized with no blur/effects.");
     }
 }
