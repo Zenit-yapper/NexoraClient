@@ -13,9 +13,6 @@
     "DirectionHudMixin",
     "ReachDisplayMixin",
     "FastPlaceMixin",
-    "ClearWaterMixin",
-    "NoBlurMixin",
-    "GameRendererMixin",
     "PermanentClearMixin"
   ],
   "injectors": {
